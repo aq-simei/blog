@@ -1,11 +1,9 @@
+import { PostsList } from "../src/Components/PostsList/index";
 
 export function App() {
   return (
     <div className="App">
-        <p>
-          Clean project
-        </p>
+      <PostsList />
     </div>
   );
 }
-
