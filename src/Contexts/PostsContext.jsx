@@ -6,48 +6,70 @@ export const PostsContext = createContext();
 
 export const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
-  const getFirst20Posts = api.get("/posts?_start=0&_limit=20");
-  const getSecond20Posts = api.get("/posts?_start=20&_limit=20");
-  const getThird20Posts = api.get("/posts?_start=40&_limit=20");
-  const getFourth20Posts = api.get("/posts?_start=60&_limit=20");
-  const getLast15Posts = api.get("/posts?_start=80&_limit=15");
+  const [showPosts, setShowPosts] = useState(false);
 
   useEffect(() => {
     const getPosts = () => {
-      getFirst20Posts
+      api
+        .get("/posts?_start=0&_limit=20")
         .then((res) => {
           setPosts(res.data);
         })
+        .catch((err) => {
+          console.log("Failed to load 0~20 posts", err);
+        })
         .then(
-          getSecond20Posts
+          api
+            .get("/posts?_start=20&_limit=20")
             .then((res) => {
               setPosts((posts) => [...posts, ...res.data]);
             })
-            .then(
-              getThird20Posts.then((res) => {
-                setPosts((posts) => [...posts, ...res.data]);
-              })
-            )
-            .then(
-              getFourth20Posts.then((res) => {
-                setPosts((posts) => [...posts, ...res.data]);
-              })
-            )
-            .then(
-              getLast15Posts.then((res) => {
-                setPosts((posts) => [...posts, ...res.data]);
-              })
-            )
             .catch((err) => {
-              console.log(err);
+              console.log("Failed to load 20~40 posts", err);
             })
-        );
+        )
+        .then(
+          api
+            .get("/posts?_start=40&_limit=20")
+            .then((res) => {
+              setPosts((posts) => [...posts, ...res.data]);
+            })
+            .catch((err) => {
+              console.log("Failed to load posts 40~60", err);
+            })
+        )
+        .then(
+          api
+            .get("/posts?_start=60&_limit=20")
+            .then((res) => {
+              setPosts((posts) => [...posts, ...res.data]);
+            })
+            .catch((err) => {
+              console.log("Failed to load posts 60~80", err);
+            })
+        )
+        .then(
+          api
+            .get("/posts?_start=80&_limit=15")
+            .then((res) => {
+              setPosts((posts) => [...posts, ...res.data]);
+              setShowPosts(true);
+            })
+            .catch((err) => {
+              console.log("Failed to load posts 80~95", err);
+            })
+        )
+        .catch(() => {
+          console.log("O erro chegou aqui");
+        });
     };
     getPosts();
   }, []);
 
   return (
-    <PostsContext.Provider value={{ posts }}>{children}</PostsContext.Provider>
+    <PostsContext.Provider value={{ posts, showPosts }}>
+      {children}
+    </PostsContext.Provider>
   );
 };
 
@@ -55,15 +77,3 @@ export const usePosts = () => {
   const context = useContext(PostsContext);
   return context;
 };
-
-// export const getPosts = () => {
-//   Promise.all([
-//     getFirst20Posts,
-//     getSecond20Posts,
-//     getThird20Posts,
-//     getFourth20Posts,
-//     getLast15Posts,
-//   ]).then((values) => {
-//     console.log(values);
-//   });
-// };
