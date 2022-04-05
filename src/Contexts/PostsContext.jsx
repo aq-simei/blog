@@ -2,19 +2,20 @@ import { api } from "../services/api";
 import { createContext, useEffect } from "react";
 import { useContext, useState } from "react";
 
-const PostsContext = createContext();
+export const PostsContext = createContext();
 
 export const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
 
   const getPosts = () => {
-    try {
-      api.get("/posts").then((res) => {
+    api
+      .get("/posts")
+      .then((res) => {
         setPosts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   useEffect(() => {

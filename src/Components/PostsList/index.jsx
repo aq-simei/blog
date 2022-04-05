@@ -1,4 +1,4 @@
-import { usePosts } from "../../Hooks/usePosts";
+import { usePosts } from "../../Contexts/PostsContext";
 
 export function PostsList() {
   const { posts } = usePosts();
