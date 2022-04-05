@@ -1,16 +1,19 @@
 import { usePosts } from "../../Contexts/PostsContext";
+import { Post } from "../Post";
 
 export function PostsList() {
-  const { posts } = usePosts();
-  if (posts.length === 95) {
+  const { posts, showPosts } = usePosts();
+  if (showPosts == true) {
     return (
       <ul className="posts-list">
         {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
+          <li key={post.id}>
+            <Post post={post} />
+          </li>
         ))}
       </ul>
     );
   } else {
-    return <div>Loading...</div>;
+    return <div className="posts-loading">Loading...</div>;
   }
 }
