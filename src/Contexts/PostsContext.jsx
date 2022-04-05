@@ -6,11 +6,11 @@ export const PostsContext = createContext();
 
 export const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
-  const getFirst20Posts = api.get("/posts?_start=0&_end=20");
-  const getSecond20Posts = api.get("/posts?_start=20&_end=40");
-  const getThird20Posts = api.get("/posts?_start=40&_end=60");
-  const getFourth20Posts = api.get("/posts?_start=60&_end=80");
-  const getLast15Posts = api.get("/posts?_start=80&_end=95");
+  const getFirst20Posts = api.get("/posts?_start=0&_limit=20");
+  const getSecond20Posts = api.get("/posts?_start=20&_limit=20");
+  const getThird20Posts = api.get("/posts?_start=40&_limit=20");
+  const getFourth20Posts = api.get("/posts?_start=60&_limit=20");
+  const getLast15Posts = api.get("/posts?_start=80&_limit=15");
 
   useEffect(() => {
     const getPosts = () => {
@@ -38,6 +38,9 @@ export const PostsProvider = ({ children }) => {
                 setPosts((posts) => [...posts, ...res.data]);
               })
             )
+            .catch((err) => {
+              console.log(err);
+            })
         );
     };
     getPosts();
