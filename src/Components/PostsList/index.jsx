@@ -1,7 +1,9 @@
 import { usePosts } from "../../Contexts/PostsContext";
+import { ListComments } from "../../services/comments";
 import { Post } from "../Post";
 
 export function PostsList() {
+  ListComments();
   const { posts, isLoading } = usePosts();
   if (isLoading === false) {
     return (
