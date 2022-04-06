@@ -5,21 +5,24 @@ import { mockedPosts } from "./Posts_mocks";
 describe("PostsList", () => {
   describe("When there are no posts yet", () => {
     it("Renders the loading message ", () => {
-      render(<PostsList />, { postsContextValue: { posts: mockedPosts } });
+      render(<PostsList />, {
+        postsContextValue: { posts: mockedPosts, isLoading: true },
+      });
       const loadingMessage = screen.getByText(/loading\.\.\./i);
       expect(loadingMessage).toBeInTheDocument();
     });
   });
   describe("When there are available posts to be rendered", () => {
     it("Renders the posts", async () => {
-      render(<PostsList />, { postsContextValue: { posts: mockedPosts } });
+      render(<PostsList />, {
+        postsContextValue: { posts: mockedPosts, isLoading: false },
+      });
 
       await waitFor(() => {
         screen.getByText(/Test title 1/i);
       });
-      const testPost = screen.getByText(/Test title /i);
 
-      expect(testPost).toBeInTheDocument();
+      expect(mockedPosts).toHaveLength(3);
     });
   });
 });

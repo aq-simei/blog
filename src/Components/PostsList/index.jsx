@@ -2,8 +2,8 @@ import { usePosts } from "../../Contexts/PostsContext";
 import { Post } from "../Post";
 
 export function PostsList() {
-  const { posts, showPosts } = usePosts();
-  if (showPosts == true) {
+  const { posts, isLoading } = usePosts();
+  if (isLoading == false) {
     return (
       <ul className="posts-list">
         {posts.map((post) => (

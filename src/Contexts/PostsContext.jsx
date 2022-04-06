@@ -6,7 +6,7 @@ export const PostsContext = createContext();
 
 export const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
-  const [showPosts, setShowPosts] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getPosts = () => {
@@ -59,9 +59,7 @@ export const PostsProvider = ({ children }) => {
               console.log("Failed to load posts 80~95", err);
             })
         )
-        .catch(() => {
-          console.log("O erro chegou aqui");
-        });
+        .finally(setIsLoading(true));
     };
     getPosts();
   }, []);
