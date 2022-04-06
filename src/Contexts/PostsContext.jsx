@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 export const PostsContext = createContext();
 
 export const PostsProvider = ({ children }) => {
-  const [posts, setPosts] = useState([]);
+  const [{ posts }, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -53,7 +53,6 @@ export const PostsProvider = ({ children }) => {
             .get("/posts?_start=80&_limit=15")
             .then((res) => {
               setPosts((posts) => [...posts, ...res.data]);
-              setShowPosts(true);
             })
             .catch((err) => {
               console.log("Failed to load posts 80~95", err);
