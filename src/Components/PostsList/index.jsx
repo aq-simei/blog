@@ -3,7 +3,7 @@ import { Post } from "../Post";
 
 export function PostsList() {
   const { posts, isLoading } = usePosts();
-  if (isLoading == false) {
+  if (isLoading === false) {
     return (
       <ul className="posts-list">
         {posts.map((post) => (

@@ -5,8 +5,8 @@ import { useContext, useState } from "react";
 export const PostsContext = createContext();
 
 export const PostsProvider = ({ children }) => {
-  const [{ posts }, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getPosts = () => {
@@ -58,13 +58,15 @@ export const PostsProvider = ({ children }) => {
               console.log("Failed to load posts 80~95", err);
             })
         )
-        .finally(setIsLoading(true));
+        .finally(() => {
+          setIsLoading(false);
+        });
     };
     getPosts();
   }, []);
 
   return (
-    <PostsContext.Provider value={{ posts, showPosts }}>
+    <PostsContext.Provider value={{ posts, isLoading }}>
       {children}
     </PostsContext.Provider>
   );
