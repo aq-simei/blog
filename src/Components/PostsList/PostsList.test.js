@@ -3,7 +3,7 @@ import { PostsList } from "./index";
 import { mockedPosts } from "./Posts_mocks";
 
 describe("PostsList", () => {
-  describe("When there are no posts yet", () => {
+  describe("When fetching data", () => {
     it("Renders the loading message ", () => {
       render(<PostsList />, {
         postsContextValue: { posts: mockedPosts, isLoading: true },
@@ -12,7 +12,7 @@ describe("PostsList", () => {
       expect(loadingMessage).toBeInTheDocument();
     });
   });
-  describe("When there are available posts to be rendered", () => {
+  describe("When data is fetched", () => {
     it("Renders the posts", async () => {
       render(<PostsList />, {
         postsContextValue: { posts: mockedPosts, isLoading: false },
