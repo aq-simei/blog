@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "../../Utils/test-utils";
+import { render, screen } from "../../Utils/test-utils";
 import { PostsList } from "./index";
 import { mockedPosts } from "./Posts_mocks";
 
@@ -17,11 +17,6 @@ describe("PostsList", () => {
       render(<PostsList />, {
         postsContextValue: { posts: mockedPosts, isLoading: false },
       });
-
-      await waitFor(() => {
-        screen.getByText(/Test title 1/i);
-      });
-
       expect(mockedPosts).toHaveLength(3);
     });
   });

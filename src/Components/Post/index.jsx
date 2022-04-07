@@ -1,7 +1,7 @@
 export const Post = ({ post }) => {
   return (
     <div>
-      <span>Post N°: {post.id}</span>
+      <span>Post #{post.id}</span>
       <p>
         <strong>{post.title}</strong>
       </p>
