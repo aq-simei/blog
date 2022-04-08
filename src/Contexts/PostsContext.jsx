@@ -32,8 +32,8 @@ export const PostsProvider = ({ children }) => {
                 })
                 .catch(err => {console.log(err.toJSON());})
                 .finally(() => {setIsLoading(false);});
-              }).catch((err) => {console.log(err.toJSON())});;
-            }).catch((err) => {console.log(err.toJSON())});;
+              }).catch((err) => {console.log(err.toJSON())});
+            }).catch((err) => {console.log(err.toJSON())});
           }).catch((err) => {console.log(err.toJSON())});
       }).catch((err) => {console.log(err.toJSON())});
     };
