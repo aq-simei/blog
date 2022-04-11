@@ -1,11 +1,10 @@
+import { PostsList } from "../src/Components/PostsList/index";
+import { PostsProvider } from "../src/Contexts/PostsContext";
 
 export function App() {
   return (
-    <div className="App">
-        <p>
-          Clean project
-        </p>
-    </div>
+    <PostsProvider>
+      <PostsList />
+    </PostsProvider>
   );
 }
-
