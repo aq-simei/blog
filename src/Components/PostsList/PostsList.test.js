@@ -4,7 +4,7 @@ import { mockedPosts } from "./Posts_mocks";
 
 describe("PostsList", () => {
   describe("When fetching data", () => {
-    it("Renders the loading message ", () => {
+    it("Renders the loading message", () => {
       render(<PostsList />, {
         postsContextValue: { posts: mockedPosts, isLoading: true },
       });
@@ -14,7 +14,7 @@ describe("PostsList", () => {
     });
   });
   describe("When data is fetched", () => {
-    it("Renders a list of 3 posts", async () => {
+    it("Renders a list of 3 posts", () => {
       render(<PostsList />, {
         postsContextValue: { posts: mockedPosts, isLoading: false },
       });

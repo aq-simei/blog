@@ -5,16 +5,9 @@ import { useContext, useState } from "react";
 export const PostsContext = createContext();
 
 export const PostsProvider = ({ children }) => {
-  const standardPostsContextValue = [
-    {
-      title: "",
-      body: "",
-      userId: "",
-      id: 0,
-    },
-  ];
 
-  const [posts, setPosts] = useState(standardPostsContextValue);
+
+  const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
