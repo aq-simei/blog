@@ -22,9 +22,11 @@ export const PostsProvider = ({ children }) => {
                 setPosts((posts) => [...posts, ...res.data]);
                 api.get("/posts?_start=80&_limit=15").then((res) => {
                   setPosts((posts) => [...posts, ...res.data]);
-                }).finally(() => {setIsLoading(false)});
-              }).catch((err) => {console.log(err.toJSON())});;
-            }).catch((err) => {console.log(err.toJSON())});;
+                })
+                .catch(err => {console.log(err.toJSON());})
+                .finally(() => {setIsLoading(false);});
+              }).catch((err) => {console.log(err.toJSON())});
+            }).catch((err) => {console.log(err.toJSON())});
           }).catch((err) => {console.log(err.toJSON())});
       }).catch((err) => {console.log(err.toJSON())});
     };
