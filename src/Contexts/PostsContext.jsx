@@ -11,10 +11,8 @@ export const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const updatePosts = (incomingPosts) => {
-    {!posts ? 
-      setPosts(incomingPosts) : 
-      setPosts((posts) => [...posts, ...incomingPosts]) } 
+  const addPosts = (incomingPosts) => {
+      setPosts((oldPosts) => [...oldPosts, ...incomingPosts])
   }
 
   useEffect(() => {
@@ -42,25 +40,25 @@ export const PostsProvider = ({ children }) => {
       return listPosts(firstRequestParams)
         .then((res) => {
           Promise.all(listPostCommentaries(res.data)).then(
-            updatePosts(res.data)
+            addPosts(res.data)
           );
           listPosts(secondRequestParams).then((res) => {
             Promise.all(listPostCommentaries(res.data)).then(
-              updatePosts(res.data)
+              addPosts(res.data)
             );
             listPosts(thirdRequestParams).then((res) => {
               Promise.all(listPostCommentaries(res.data)).then(
-                updatePosts(res.data)
+                addPosts(res.data)
               );
 
               listPosts(fourthRequestParams).then((res) => {
                 Promise.all(listPostCommentaries(res.data)).then(
-                  updatePosts(res.data)
+                  addPosts(res.data)
                 );
 
                 listPosts(fifthRequestParams).then((res) => {
                   Promise.all(listPostCommentaries(res.data)).then(
-                    updatePosts(res.data)
+                    addPosts(res.data)
                   );
                 })
                 .catch((err) => {
