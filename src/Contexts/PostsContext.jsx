@@ -5,9 +5,12 @@ import { api } from "../services/api.js";
 import { listPosts } from "../services/post.js";
 import { listPostCommentaries } from "../services/commentary";
 
+
 export const PostsContext = createContext();
 
 export const PostsProvider = ({ children }) => {
+
+
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
