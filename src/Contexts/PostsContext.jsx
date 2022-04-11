@@ -1,7 +1,9 @@
-import { api } from "../services/api";
 import { createContext, useEffect } from "react";
 import { useContext, useState } from "react";
+
+import {listPosts} from '../services/post.js';
 import { listPostCommentaries } from "../services/commentary";
+
 
 export const PostsContext = createContext();
 
@@ -10,9 +12,12 @@ export const PostsProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const firstRequestParams = {
+      _start: 0,
+      _limit: 20
+  }
     const getPosts = () => {
-      api
-        .get("/posts?_start=0&_limit=20")
+      return listPosts(firstRequestParams)
         .then((res) => {
           Promise.all(listPostCommentaries(res.data)).then(
             (postWithCommentaries) => {
@@ -57,9 +62,9 @@ export const PostsProvider = ({ children }) => {
           //     console.log(err.toJSON());
           //   });
         })
-        .catch((err) => {
-          console.log(err.toJSON());
-        });
+        // .catch((err) => {
+        //   console.log(err.toJSON());
+        // });
     };
     getPosts();
   }, []);
