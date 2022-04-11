@@ -11,6 +11,12 @@ export const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const updatePosts = (incomingPosts) => {
+    {!posts ? 
+      setPosts(incomingPosts) : 
+      setPosts((posts) => [...posts, ...incomingPosts]) } 
+  }
+
   useEffect(() => {
     const firstRequestParams = {
       _start: 0,
@@ -36,35 +42,25 @@ export const PostsProvider = ({ children }) => {
       return listPosts(firstRequestParams)
         .then((res) => {
           Promise.all(listPostCommentaries(res.data)).then(
-            (postWithCommentaries) => {
-              setPosts(postWithCommentaries);
-            }
+            updatePosts(res.data)
           );
           listPosts(secondRequestParams).then((res) => {
             Promise.all(listPostCommentaries(res.data)).then(
-              (postWithCommentaries) => {
-                setPosts((posts) => [...posts, ...postWithCommentaries]);
-              }
+              updatePosts(res.data)
             );
             listPosts(thirdRequestParams).then((res) => {
               Promise.all(listPostCommentaries(res.data)).then(
-                (postWithCommentaries) => {
-                  setPosts((posts) => [...posts, ...postWithCommentaries]);
-                }
+                updatePosts(res.data)
               );
 
               listPosts(fourthRequestParams).then((res) => {
                 Promise.all(listPostCommentaries(res.data)).then(
-                  (postWithCommentaries) => {
-                    setPosts((posts) => [...posts, ...postWithCommentaries]);
-                  }
+                  updatePosts(res.data)
                 );
 
                 listPosts(fifthRequestParams).then((res) => {
                   Promise.all(listPostCommentaries(res.data)).then(
-                    (postWithCommentaries) => {
-                      setPosts((posts) => [...posts, ...postWithCommentaries]);
-                    }
+                    updatePosts(res.data)
                   );
                 })
                 .catch((err) => {
