@@ -2,12 +2,8 @@ import { api } from "../services/api";
 import { createContext, useEffect } from "react";
 import { useContext, useState } from "react";
 
-export const postsContextDefaultValue = {
-  posts: [],
-  isLoading: true,
-}
 
-export const PostsContext = createContext(postsContextDefaultValue);
+export const PostsContext = createContext();
 
 export const PostsProvider = ({ children }) => {
 
