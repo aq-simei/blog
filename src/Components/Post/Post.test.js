@@ -13,7 +13,7 @@ describe("Post", () => {
     });
     const postTitle = screen.getByText(/Test title 1/i);
     expect(postTitle).toBeInTheDocument();
-    const postId = screen.getByText(/Post N°: 1/i);
+    const postId = screen.getByText(/Post #1/i);
     expect(postId).toBeInTheDocument();
   });
 });

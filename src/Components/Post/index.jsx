@@ -4,9 +4,9 @@ export const Post = ({ post }) => {
 
   return (
     <div>
-      {/* <span>Post #{post.id}</span> */}
+      <span>Post #{post.id}</span>
       <p>
-        <strong>{post.commentaries[0].body}</strong>
+        <strong>{post.title}</strong>
       </p>
 
     </div>
