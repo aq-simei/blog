@@ -5,6 +5,7 @@ export const Post = ({ post }) => {
       <p>
         <strong>{post.title}</strong>
       </p>
+
     </div>
   );
 };
