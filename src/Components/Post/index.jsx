@@ -1,7 +1,4 @@
-import { listPostCommentaries } from "../../services/commentary";
-
 export const Post = ({ post }) => {
-
   return (
     <div>
       <span>Post #{post.id}</span>
